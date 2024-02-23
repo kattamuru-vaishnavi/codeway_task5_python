@@ -1,0 +1,99 @@
+import random
+
+class Quiz:
+    def __init__(self, questions):
+        self.questions = questions
+        self.score = 0
+
+    def display_welcome_message(self):
+        print("Welcome to the Entertainment Quiz!")
+        print("Answer the following questions to test your knowledge.\n")
+
+    def present_quiz_questions(self):
+        random.shuffle(self.questions)
+        for q in self.questions:
+            print(q['question'])
+            if 'choices' in q:
+                for i, choice in enumerate(q['choices'], 1):
+                    print(f"{i}. {choice}")
+            user_answer = input("Your answer: ").strip().lower()
+            self.evaluate_user_answer(user_answer, q['answer'])
+            print(f"Score for this question: {self.score}/{len(self.questions)}")
+            print()
+
+    def evaluate_user_answer(self, user_answer, correct_answer):
+        if user_answer == correct_answer.lower():
+            print("Correct!")
+            self.score += 1
+        else:
+            print("Incorrect.")
+            print(f"The correct answer is: {correct_answer}")
+
+    def display_final_results(self):
+        print(f"\nQuiz completed! Your final score is: {self.score}/{len(self.questions)}")
+        if self.score / len(self.questions) < 0.5:
+            print("Better luck next time!")
+        else:
+            print("Well done!")
+
+def main():
+    questions = [
+     
+    {
+        'question': "Who was the first Emperor of the Maurya Dynasty in ancient India?",
+        'answer': "Chandragupta Maurya"
+    },
+    {
+        'question': "Which Mughal emperor built the Taj Mahal in memory of his wife Mumtaz Mahal?",
+        'answer': "Shah Jahan"
+    },
+    {
+        'question': "In which year did India gain independence from British rule?",
+        'answer': "1947"
+    },
+    {
+        'question': "Who was the leader of the non-violent civil disobedience movement against British rule, also known as the 'Father of the Nation'?",
+        'answer': "Mahatma Gandhi"
+    },
+    {
+        'question': "Which ancient Indian text is a compilation of teachings on various subjects, including statecraft and military strategy?",
+        'answer': "Arthashastra"
+    },
+    {
+        'question': "Who was the first woman Prime Minister of India?",
+        'answer': "Indira Gandhi"
+    },
+    {
+        'question': "Which battle in 1757 is considered a turning point in Indian history and established British supremacy in India?",
+        'answer': "Battle of Plassey"
+    },
+    {
+        'question': "Who was the founder of the Gupta Empire, often referred to as the 'Golden Age' of ancient India?",
+        'answer': "Chandragupta I"
+    },
+    {
+        'question': "The Harappan civilization was primarily located in which modern-day region of the Indian subcontinent?",
+        'answer': "Indus Valley"
+    },
+    {
+        'question': "Who was the prominent leader of the Indian National Congress and the first Prime Minister of independent India?",
+        'answer': "Jawaharlal Nehru"
+    }
+]
+
+
+
+
+    quiz = Quiz(questions)
+    quiz.display_welcome_message()
+    quiz.present_quiz_questions()
+    quiz.display_final_results()
+
+    play_again = input("Do you want to play again? (yes/no): ").strip().lower()
+    if play_again == "yes":
+        main()
+    else:
+        print("Goodbye!")
+
+if __name__ == "__main__":
+    main()
